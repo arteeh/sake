@@ -5,7 +5,7 @@ A small GitHub Pages site whose sake reviews are stored as Markdown files.
 ## Add a review
 
 1. Put the bottle photo in `images/`.
-2. Create a Markdown file in the appropriate tier folder, such as `reviews/S/my-sake.md`:
+2. Create a Markdown file in the appropriate tier folder, such as `_reviews/S/my-sake.md`:
 
    ```md
    ---
@@ -25,16 +25,16 @@ The `image` value can be left blank to show a placeholder. The review below the 
 
 ## How reviews are loaded
 
-`app.js` uses GitHub's public repository API to find the tier folders and load every Markdown file in them, so adding a review does not require updating a manifest. Reviews are ordered alphabetically by filename. During a GitHub Pages branch preview, the script automatically finds the branch containing the `reviews/` folder; after merge, it uses the default branch.
+GitHub Pages' built-in Jekyll build discovers every Markdown file in the `_reviews` collection and renders it directly into `index.html`. The browser receives the complete tier list with the page, so loading reviews uses no GitHub API calls or additional requests. Reviews are grouped by their tier folder and ordered alphabetically by filename.
 
-The site uses [marked](https://marked.js.org/) to turn Markdown into HTML. Rendered HTML is sanitized with [DOMPurify](https://github.com/cure53/DOMPurify). Because folder discovery uses GitHub's unauthenticated API, the repository must remain public.
+The leading underscore in `_reviews` tells Jekyll that the directory is a collection. Adding a review only requires placing its Markdown file in the appropriate tier folder; there is no review manifest to update.
 
 ## Preview locally
 
-Because the page fetches review files, opening `index.html` directly with a `file://` URL will not work. Start a small local server instead:
+GitHub Pages builds the review collection before serving the site. To preview that generated page locally, install Jekyll and run:
 
 ```sh
-python3 -m http.server 8000
+jekyll serve
 ```
 
-Then visit <http://localhost:8000>.
+Then visit <http://localhost:4000>.

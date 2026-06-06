@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,9 +17,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js" defer></script>
-    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="page-shell">
@@ -43,7 +42,41 @@
         </section>
 
         <section class="tier-list" id="tier-list" aria-label="Sake rankings">
-          <p class="loading-message">Pouring the reviews…</p>
+          {% assign tier_letters = "S,A,B,C,D,E,F" | split: "," %}
+          {% assign tier_descriptions = "exceptional,excellent,very good,pretty okay,not for me,rough,never again" | split: "," %}
+          {% for letter in tier_letters %}
+            {% assign tier_path = "/" | append: letter | append: "/" %}
+            {% assign tier_reviews = site.reviews | where_exp: "review", "review.path contains tier_path" | sort: "path" %}
+            <section class="tier tier-{{ letter | downcase }}" aria-labelledby="tier-{{ letter | downcase }}-title">
+              <div class="tier-label">
+                <h2 id="tier-{{ letter | downcase }}-title">{{ letter }}</h2>
+                <span>{{ tier_descriptions[forloop.index0] }}</span>
+              </div>
+              <div class="tier-entries{% unless tier_reviews.size > 0 %} empty-tier{% endunless %}">
+                {% for review in tier_reviews %}
+                  <article class="sake-card">
+                    {% if review.image and review.image != "" %}
+                      <img src="{{ review.image | relative_url }}" alt="{{ review.imageAlt | default: review.name | escape }}" loading="lazy" />
+                    {% else %}
+                      <div class="photo-placeholder" role="img" aria-label="No sake photo added yet">
+                        <span>your photo</span>
+                      </div>
+                    {% endif %}
+                    <div class="card-copy">
+                      <p class="date">{% if review.date %}{{ review.date | date: "%B %d, %Y" }}{% else %}Date unknown{% endif %}</p>
+                      <h3>{{ review.name | default: "Unnamed sake" | escape }}</h3>
+                      {% assign review_body = review.content | strip %}
+                      {% if review_body != "" %}
+                        <div class="review markdown-body">{{ review.content }}</div>
+                      {% endif %}
+                    </div>
+                  </article>
+                {% else %}
+                  <p>Nothing here yet.</p>
+                {% endfor %}
+              </div>
+            </section>
+          {% endfor %}
         </section>
       </main>
 
