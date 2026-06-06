@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="arteeh's personal tier list of every sake they've tried."
+    />
+    <title>arteeh's sake tier list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="brand-mark" aria-hidden="true">酒</span>
+          <span>arteeh's sake tier list</span>
+        </a>
+        <p class="header-note">a completely subjective archive</p>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="page-title">
+          <p class="eyebrow">飲んだ日本酒 · sake i've tried</p>
+          <h1 id="page-title">Every bottle,<br /><em>ranked.</em></h1>
+          <p class="intro">
+            A running record of the good, the great, and the ones best left
+            on the shelf.
+          </p>
+          <a class="scroll-link" href="#tier-list">
+            see the list <span aria-hidden="true">↓</span>
+          </a>
+        </section>
+
+        <section class="tier-list" id="tier-list" aria-label="Sake rankings">
+          <!--
+            To add a sake, copy an <article class="sake-card"> block into the
+            tier you want. Replace the placeholder <div> with:
+            <img src="images/your-photo.jpg" alt="Bottle of Sake Name" />
+          -->
+          <section class="tier tier-s" aria-labelledby="tier-s-title">
+            <div class="tier-label">
+              <h2 id="tier-s-title">S</h2>
+              <span>exceptional</span>
+            </div>
+            <div class="tier-entries">
+              <article class="sake-card">
+                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
+                  <span>your photo</span>
+                </div>
+                <div class="card-copy">
+                  <p class="date">May 18, 2026</p>
+                  <h3>Your favorite sake</h3>
+                  <p class="review">
+                    Add a few words about what made this bottle unforgettable.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="tier tier-a" aria-labelledby="tier-a-title">
+            <div class="tier-label">
+              <h2 id="tier-a-title">A</h2>
+              <span>excellent</span>
+            </div>
+            <div class="tier-entries">
+              <article class="sake-card">
+                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
+                  <span>your photo</span>
+                </div>
+                <div class="card-copy">
+                  <p class="date">April 02, 2026</p>
+                  <h3>A really great sake</h3>
+                  <p class="review">Clean, balanced, and one you'd happily drink again.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="tier tier-b" aria-labelledby="tier-b-title">
+            <div class="tier-label">
+              <h2 id="tier-b-title">B</h2>
+              <span>very good</span>
+            </div>
+            <div class="tier-entries">
+              <article class="sake-card compact">
+                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
+                  <span>your photo</span>
+                </div>
+                <div class="card-copy">
+                  <p class="date">March 14, 2026</p>
+                  <h3>A solid sake</h3>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="tier tier-c" aria-labelledby="tier-c-title">
+            <div class="tier-label">
+              <h2 id="tier-c-title">C</h2>
+              <span>pretty okay</span>
+            </div>
+            <div class="tier-entries empty-tier">
+              <p>Nothing here yet.</p>
+            </div>
+          </section>
+
+          <section class="tier tier-d" aria-labelledby="tier-d-title">
+            <div class="tier-label">
+              <h2 id="tier-d-title">D</h2>
+              <span>not for me</span>
+            </div>
+            <div class="tier-entries empty-tier">
+              <p>Nothing here yet.</p>
+            </div>
+          </section>
+
+          <section class="tier tier-e" aria-labelledby="tier-e-title">
+            <div class="tier-label">
+              <h2 id="tier-e-title">E</h2>
+              <span>rough</span>
+            </div>
+            <div class="tier-entries empty-tier">
+              <p>Nothing here yet.</p>
+            </div>
+          </section>
+
+          <section class="tier tier-f" aria-labelledby="tier-f-title">
+            <div class="tier-label">
+              <h2 id="tier-f-title">F</h2>
+              <span>never again</span>
+            </div>
+            <div class="tier-entries empty-tier">
+              <p>Nothing here yet.</p>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <footer>
+        <p>kanpai! <span aria-hidden="true">乾杯</span></p>
+        <a href="#top">back to top ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>
