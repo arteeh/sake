@@ -9,6 +9,8 @@ const tiers = {
 };
 
 const tierList = document.querySelector("#tier-list");
+const repository = "arteeh/sake";
+const githubApi = `https://api.github.com/repos/${repository}`;
 
 function parseReview(source) {
   const match = source.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
@@ -115,22 +117,72 @@ function createTier(letter, description, cards) {
   return tier;
 }
 
-async function loadReview(path) {
-  const response = await fetch(path);
-  if (!response.ok) throw new Error(`Could not load ${path}`);
+async function fetchFromGitHub(path, ref) {
+  const url = new URL(`${githubApi}/${path}`);
+  if (ref) url.searchParams.set("ref", ref);
+
+  const response = await fetch(url, {
+    headers: { Accept: "application/vnd.github+json" },
+  });
+
+  if (!response.ok) {
+    const error = new Error(`GitHub returned ${response.status} for ${path}`);
+    error.status = response.status;
+    throw error;
+  }
+
+  return response.json();
+}
+
+async function findReviewsRef() {
+  try {
+    return { ref: undefined, entries: await fetchFromGitHub("contents/reviews") };
+  } catch (error) {
+    if (error.status !== 404) throw error;
+  }
+
+  // A GitHub Pages preview can be built from a branch other than the default
+  // branch. Find that branch automatically until the site changes are merged.
+  const branches = await fetchFromGitHub("branches?per_page=100");
+  for (const branch of branches) {
+    try {
+      const entries = await fetchFromGitHub("contents/reviews", branch.name);
+      return { ref: branch.name, entries };
+    } catch (error) {
+      if (error.status !== 404) throw error;
+    }
+  }
+
+  throw new Error("No branch contains a reviews folder.");
+}
+
+async function loadReview(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Could not load ${url}`);
   return parseReview(await response.text());
+}
+
+async function loadTierReviews(letter, ref) {
+  const entries = await fetchFromGitHub(`contents/reviews/${letter}`, ref);
+  const files = entries
+    .filter((entry) => entry.type === "file" && entry.name.endsWith(".md"))
+    .sort((left, right) => left.name.localeCompare(right.name));
+
+  return Promise.all(files.map((file) => loadReview(file.download_url)));
 }
 
 async function renderTierList() {
   try {
-    const response = await fetch("reviews/index.json");
-    if (!response.ok) throw new Error("Could not load reviews/index.json");
-    const manifest = await response.json();
+    const { ref, entries } = await findReviewsRef();
+    const availableFolders = new Set(
+      entries.filter((entry) => entry.type === "dir").map((entry) => entry.name),
+    );
 
     const sections = await Promise.all(
       Object.entries(tiers).map(async ([letter, description]) => {
-        const paths = manifest[letter] || [];
-        const reviews = await Promise.all(paths.map(loadReview));
+        const reviews = availableFolders.has(letter)
+          ? await loadTierReviews(letter, ref)
+          : [];
         return createTier(letter, description, reviews.map(createCard));
       }),
     );
@@ -141,7 +193,7 @@ async function renderTierList() {
     tierList.innerHTML = `
       <div class="load-error">
         <h2>The reviews could not be loaded.</h2>
-        <p>Run the site through a local server or check the review manifest.</p>
+        <p>Check that this public repository has review folders available on GitHub.</p>
       </div>
     `;
   }

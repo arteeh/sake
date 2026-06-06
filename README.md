@@ -17,17 +17,17 @@ A small GitHub Pages site whose sake reviews are stored as Markdown files.
    Your optional **Markdown review** goes here.
    ```
 
-3. Add the file path to the matching tier in `reviews/index.json`. The order in that array is the order shown on the page.
-
 The `image` value can be left blank to show a placeholder. The review below the front matter is optional and supports standard Markdown, including links, lists, emphasis, and images:
 
 ```md
 ![A glass of sake](images/my-sake-pour.jpg)
 ```
 
-## Why there is a manifest
+## How reviews are loaded
 
-A static GitHub Pages site cannot automatically list the files inside the `reviews/` folders. `reviews/index.json` is a small manifest that tells the browser which Markdown files to fetch. `app.js` loads those files and uses [marked](https://marked.js.org/) to turn Markdown into HTML. Rendered HTML is sanitized with [DOMPurify](https://github.com/cure53/DOMPurify).
+`app.js` uses GitHub's public repository API to find the tier folders and load every Markdown file in them, so adding a review does not require updating a manifest. Reviews are ordered alphabetically by filename. During a GitHub Pages branch preview, the script automatically finds the branch containing the `reviews/` folder; after merge, it uses the default branch.
+
+The site uses [marked](https://marked.js.org/) to turn Markdown into HTML. Rendered HTML is sanitized with [DOMPurify](https://github.com/cure53/DOMPurify). Because folder discovery uses GitHub's unauthenticated API, the repository must remain public.
 
 ## Preview locally
 
