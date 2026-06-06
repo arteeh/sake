@@ -1,6 +1,6 @@
 :root {
   --ink: #20201d;
-  --muted: #77756e;
+  --muted: #68665f;
   --paper: #f4f0e8;
   --paper-deep: #ebe5d9;
   --line: #d7d0c3;
@@ -132,28 +132,6 @@ h1 em {
   margin: 32px 0 0;
   color: var(--muted);
   font-size: 1rem;
-}
-
-.scroll-link {
-  width: fit-content;
-  margin-top: 32px;
-  color: var(--ink);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.scroll-link span {
-  display: inline-block;
-  margin-left: 8px;
-  color: var(--red);
-  transition: transform 180ms ease;
-}
-
-.scroll-link:hover span {
-  transform: translateY(4px);
 }
 
 .tier-list {
@@ -332,6 +310,7 @@ footer a:hover {
 
   h1 {
     font-size: clamp(3.7rem, 20vw, 5.8rem);
+    line-height: 0.94;
   }
 
   .tier {
@@ -355,7 +334,15 @@ footer a:hover {
   }
 
   .tier-entries {
-    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card-copy {
+    padding: 14px;
+  }
+
+  .card-copy h3 {
+    font-size: 1.3rem;
   }
 
   footer {
@@ -364,29 +351,10 @@ footer a:hover {
   }
 }
 
-.loading-message,
-.load-error {
-  margin: 40px 0;
-  padding: 40px;
-  color: var(--muted);
-  background: rgba(255, 253, 248, 0.72);
-  border: 1px dashed var(--line);
-  font-family: "DM Serif Display", serif;
-  font-style: italic;
-}
-
-.load-error h2 {
-  margin: 0;
-  color: var(--ink);
-  font-size: 1.6rem;
-  font-weight: 400;
-}
-
-.load-error p {
-  margin-bottom: 0;
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.85rem;
-  font-style: normal;
+@media (max-width: 360px) {
+  .tier-entries {
+    grid-template-columns: 1fr;
+  }
 }
 
 .markdown-body > :first-child {
