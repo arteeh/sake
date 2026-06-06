@@ -51,7 +51,7 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-.brand {
+.site-identity {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -62,7 +62,7 @@ body {
   text-decoration: none;
 }
 
-.brand-mark {
+.site-identity-mark {
   display: grid;
   width: 36px;
   height: 36px;
@@ -373,6 +373,8 @@ footer a:hover {
 }
 
 .markdown-body img {
+  display: block;
+  max-width: 100%;
   height: auto;
   margin-top: 10px;
   border: 1px solid var(--line);
