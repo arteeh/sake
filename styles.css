@@ -185,9 +185,12 @@ h1 em {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
   background: var(--paper-deep);
   border-bottom: 1px solid var(--line);
+}
+
+.sake-card > img {
+  object-fit: contain;
 }
 
 .photo-placeholder {
