@@ -1,0 +1,3 @@
+collections:
+  reviews:
+    output: false

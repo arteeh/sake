@@ -1,0 +1,86 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="arteeh's personal tier list of every sake they've tried."
+    />
+    <title>arteeh's sake tier list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="brand-mark" aria-hidden="true">酒</span>
+          <span>arteeh's sake tier list</span>
+        </a>
+        <p class="header-note">a completely subjective archive</p>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="page-title">
+          <p class="eyebrow">飲んだ日本酒 · sake i've tried</p>
+          <h1 id="page-title">Every bottle,<br /><em>ranked.</em></h1>
+          <p class="intro">
+            A running record of the good, the great, and the ones best left
+            on the shelf.
+          </p>
+        </section>
+
+        <section class="tier-list" id="tier-list" aria-label="Sake rankings">
+          {% assign tier_letters = "S,A,B,C,D,E,F" | split: "," %}
+          {% assign tier_descriptions = "exceptional,excellent,very good,pretty okay,not for me,rough,never again" | split: "," %}
+          {% for letter in tier_letters %}
+            {% assign tier_path = "/" | append: letter | append: "/" %}
+            {% assign tier_reviews = site.reviews | where_exp: "review", "review.path contains tier_path" | sort: "path" %}
+            <section class="tier tier-{{ letter | downcase }}" aria-labelledby="tier-{{ letter | downcase }}-title">
+              <div class="tier-label">
+                <h2 id="tier-{{ letter | downcase }}-title">{{ letter }}</h2>
+                <span>{{ tier_descriptions[forloop.index0] }}</span>
+              </div>
+              <div class="tier-entries{% unless tier_reviews.size > 0 %} empty-tier{% endunless %}">
+                {% for review in tier_reviews %}
+                  <article class="sake-card">
+                    {% if review.image and review.image != "" %}
+                      <img src="{{ review.image | relative_url }}" alt="{{ review.imageAlt | default: review.name | escape }}" loading="lazy" />
+                    {% else %}
+                      <div class="photo-placeholder" role="img" aria-label="No sake photo added yet">
+                        <span>your photo</span>
+                      </div>
+                    {% endif %}
+                    <div class="card-copy">
+                      <p class="date">{% if review.date %}{{ review.date | date: "%B %d, %Y" }}{% else %}Date unknown{% endif %}</p>
+                      <h3>{{ review.name | default: "Unnamed sake" | escape }}</h3>
+                      {% assign review_body = review.content | strip %}
+                      {% if review_body != "" %}
+                        <div class="review markdown-body">{{ review.content }}</div>
+                      {% endif %}
+                    </div>
+                  </article>
+                {% else %}
+                  <p>Nothing here yet.</p>
+                {% endfor %}
+              </div>
+            </section>
+          {% endfor %}
+        </section>
+      </main>
+
+      <footer>
+        <p>kanpai! <span aria-hidden="true">乾杯</span></p>
+        <a href="#top">back to top ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>
