@@ -202,7 +202,7 @@ h1 em {
   transform: translateY(-4px);
 }
 
-.sake-card img,
+.sake-card > img,
 .photo-placeholder {
   display: block;
   width: 100%;
@@ -362,4 +362,47 @@ footer a:hover {
     gap: 24px;
     padding-top: 0;
   }
+}
+
+.loading-message,
+.load-error {
+  margin: 40px 0;
+  padding: 40px;
+  color: var(--muted);
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px dashed var(--line);
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+}
+
+.load-error h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.load-error p {
+  margin-bottom: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.85rem;
+  font-style: normal;
+}
+
+.markdown-body > :first-child {
+  margin-top: 0;
+}
+
+.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body a {
+  color: var(--red);
+}
+
+.markdown-body img {
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid var(--line);
 }

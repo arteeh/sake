@@ -15,6 +15,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js" defer></script>
+    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="page-shell">
@@ -40,108 +43,7 @@
         </section>
 
         <section class="tier-list" id="tier-list" aria-label="Sake rankings">
-          <!--
-            To add a sake, copy an <article class="sake-card"> block into the
-            tier you want. Replace the placeholder <div> with:
-            <img src="images/your-photo.jpg" alt="Bottle of Sake Name" />
-          -->
-          <section class="tier tier-s" aria-labelledby="tier-s-title">
-            <div class="tier-label">
-              <h2 id="tier-s-title">S</h2>
-              <span>exceptional</span>
-            </div>
-            <div class="tier-entries">
-              <article class="sake-card">
-                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
-                  <span>your photo</span>
-                </div>
-                <div class="card-copy">
-                  <p class="date">May 18, 2026</p>
-                  <h3>Your favorite sake</h3>
-                  <p class="review">
-                    Add a few words about what made this bottle unforgettable.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section class="tier tier-a" aria-labelledby="tier-a-title">
-            <div class="tier-label">
-              <h2 id="tier-a-title">A</h2>
-              <span>excellent</span>
-            </div>
-            <div class="tier-entries">
-              <article class="sake-card">
-                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
-                  <span>your photo</span>
-                </div>
-                <div class="card-copy">
-                  <p class="date">April 02, 2026</p>
-                  <h3>A really great sake</h3>
-                  <p class="review">Clean, balanced, and one you'd happily drink again.</p>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section class="tier tier-b" aria-labelledby="tier-b-title">
-            <div class="tier-label">
-              <h2 id="tier-b-title">B</h2>
-              <span>very good</span>
-            </div>
-            <div class="tier-entries">
-              <article class="sake-card compact">
-                <div class="photo-placeholder" role="img" aria-label="Add your sake photo here">
-                  <span>your photo</span>
-                </div>
-                <div class="card-copy">
-                  <p class="date">March 14, 2026</p>
-                  <h3>A solid sake</h3>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section class="tier tier-c" aria-labelledby="tier-c-title">
-            <div class="tier-label">
-              <h2 id="tier-c-title">C</h2>
-              <span>pretty okay</span>
-            </div>
-            <div class="tier-entries empty-tier">
-              <p>Nothing here yet.</p>
-            </div>
-          </section>
-
-          <section class="tier tier-d" aria-labelledby="tier-d-title">
-            <div class="tier-label">
-              <h2 id="tier-d-title">D</h2>
-              <span>not for me</span>
-            </div>
-            <div class="tier-entries empty-tier">
-              <p>Nothing here yet.</p>
-            </div>
-          </section>
-
-          <section class="tier tier-e" aria-labelledby="tier-e-title">
-            <div class="tier-label">
-              <h2 id="tier-e-title">E</h2>
-              <span>rough</span>
-            </div>
-            <div class="tier-entries empty-tier">
-              <p>Nothing here yet.</p>
-            </div>
-          </section>
-
-          <section class="tier tier-f" aria-labelledby="tier-f-title">
-            <div class="tier-label">
-              <h2 id="tier-f-title">F</h2>
-              <span>never again</span>
-            </div>
-            <div class="tier-entries empty-tier">
-              <p>Nothing here yet.</p>
-            </div>
-          </section>
+          <p class="loading-message">Pouring the reviews…</p>
         </section>
       </main>
 
