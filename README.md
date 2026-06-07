@@ -5,7 +5,7 @@ A small GitHub Pages site whose sake reviews are stored as Markdown files.
 ## Add a review
 
 1. Put the bottle photo in `images/`.
-2. Create a Markdown file in the appropriate tier folder, such as `_reviews/S/my-sake.md`:
+2. Create a Markdown file in the appropriate `S`, `A`, `K`, or `E` tier folder, such as `_reviews/S/my-sake.md`:
 
    ```md
    ---

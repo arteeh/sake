@@ -39,8 +39,8 @@
         </section>
 
         <section class="tier-list" id="tier-list" aria-label="Sake rankings">
-          {% assign tier_letters = "S,A,B,C,D,E,F" | split: "," %}
-          {% assign tier_descriptions = "exceptional,excellent,very good,pretty okay,not for me,rough,never again" | split: "," %}
+          {% assign tier_letters = "S,A,K,E" | split: "," %}
+          {% assign tier_descriptions = "Suberb,Awesome,Kinda,Ehh" | split: "," %}
           {% for letter in tier_letters %}
             {% assign tier_path = "/" | append: letter | append: "/" %}
             {% assign tier_reviews = site.reviews | where_exp: "review", "review.path contains tier_path" | sort: "path" %}
